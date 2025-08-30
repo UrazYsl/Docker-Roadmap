@@ -1,0 +1,47 @@
+__Linux_Namespaces__
+-Isolation for running process
+-Limit access to system resource, process is not aware of limitation
+
+
+*Configure your container's application to run as unprivileged users to prevent privilege-escalation attacks
+
+*If process must be run as root, re-map this user to a less-privileged user on the Docker host
+
+*Basically run docker users as low privilege as possible
+
+*User mapping for perms basically means limiting the root perms to the container/application
+
+*No power over anything in the system
+
+
+__Remapping,_Subordinate_User_And_Group_IDs__
+-Remapping is handled by two files: /etc/subuid and /etc/subgid
+-One is concerned with the User ID range, other with Group ID range
+-Ex: testuser:231072:65536
+	-231072(included) and the next 65536(included) ids are mapped within the namespace(container in this case)
+	-Start(231072) is mapped as UID 0(root)
+	-UID 231073 is mapped as UID 1 and so forth
+-Processes cannot escalate privilege outside of the container as the high UID doesn't even map to a real user
+-No privilege on the host at all
+
+*It is possible to assign subordinate ranges for a given user or group by adding multiple non-overlapping mappings
+for the same user or group in the /etc/subuid or /etc/subgid files. In this case, Docker uses only the first five
+mappings in accordance with the kernel's limitation of five entries in /proc/self/uid_map and /proc/self/gid_map
+*EX:
+	dockremap:100000:65536
+	dockremap:165536:65536
+	dockremap:231072:65536
+	dockremap:296608:65536
+	dockremap:362144:65536
+	dockremap:427680:65536
+	-Only the first 5 are used
+
+*When configuring Docker to use userns-remap, you can optionally specify an existing user and/or group, or default
+*If you select default, a user and group dockremap is created and used
+
+**SOME DISTRIBUTIONS DO NOT AUTOMATICALLY ADD THE NEW GROUP TO /etc/subuid AND /etc/subgid FILES
+
+*Ranges should not overlap so that processes cannot gain access in a different namespace
+
+
+
