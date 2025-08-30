@@ -1,0 +1,22 @@
+__Bare_Metal__
+-When applications are run directly on hardware
+-Maximum performance
+-Minimum flexibility
+
+__VM__
+-Uses Hypervisors to run multiple OSs
+-Strong isolation
+-Higher overhead(extra cost in resources)
+
+__Containers__
+-Shared host OS kernel
+-Lightweight isolation
+-Better resource efficiency than VM
+-Better portability than Bare Metal
+
+
+ADDITIONALLY:
+__OCI(Open Container Initiative)__
+-Project that aims to set industry standarts for container formats & runtimes
+-Basically ensure compatability and interopability of containers
+-Prevention of "Docker" to lock-in containers
