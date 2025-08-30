@@ -1,0 +1,39 @@
+__Container__
+
+-Packages software into units
+-Container: standard unit of software that packages up code & dependencies
+
+
+__Docker_Container_Image__
+-Package of software that includes everything needed to run an app
+-Containers become containers at runtime
+-Docker containers/images become containers when run on docker engine
+
+
+*Containers will always run the same regardless of infrastructure
+
+*Containers isolate software from its environment & ensure it works uniformly
+
+
+___3_Types_Of_Docker_Containers___
+-Standard: industry standard container
+-Lightweight: containers that share OS's system kernel, does not require separate OS per application
+-Secure: strongest default isolation capabilities
+
+
+___VM_Vs_Containers___
+Containers:
+-Abstraction at the app layer that packages code and dependencies together
+-Multiple containers can run on the same machine, and share OS kernel
+-Take up less space than VM
+-Can handle more applications
+-Require fever VMs and OS
+
+VM:
+-Abstracion of physical hardware, turning one server into many
+-Hypervisors(basically tricks VMs into thinking each have their own dedicated hardware), allow multiple VMs to run on one machine
+-Each VM includes a full copy of an OS, the app, necessary libraries and binaries which take tens of GBs
+-Slower to boot
+
+
+*VMs and Containers can be used together for a graet deal of flexibility
